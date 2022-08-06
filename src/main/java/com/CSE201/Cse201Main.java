@@ -1,3 +1,5 @@
+package com.CSE201;
+
 import java.awt.BorderLayout;
 
 import javax.swing.JButton;
@@ -11,7 +13,7 @@ import javax.swing.JTextField;
 
 /*@author Barb
 */
-public class Cse201Application extends JFrame{
+public class Cse201Main extends JFrame{
 	JFrame window = new JFrame("CSE201 Application");
 	JPanel Jpanel1, Jpanel2, Jpanel3;
 	JTextField text;
@@ -19,7 +21,7 @@ public class Cse201Application extends JFrame{
 	JLabel jlabel1, jlabel2;
 	JButton login, exit;
 
-	public Cse201Application(){
+	public Cse201Main(){
 		window.setBounds(100, 100, 700, 700);
 		window.setAlwaysOnTop(true);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -61,7 +63,7 @@ public class Cse201Application extends JFrame{
 
 
 	public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException,IllegalStateException,IllegalArgumentException {
-		Cse201Application cse = new Cse201Application();
+		Cse201Main cse = new Cse201Main();
 		 	
 	                
 	        cse.setVisible(true);

@@ -55,20 +55,20 @@ public class ApplicationDB {
      * Removes user based on username
      * @param
      */
-    public boolean loadFileUser() {
-        try {
-            Scanner sc= new Scanner(new File(filename));
-            while (sc.hasNext()) {
-                String line = sc.nextLine();
-                LogRecord record = new LogRecord(line);
-                //add record to the deltaRecord
-                deltaRecords.add(record);
-            }
-        } catch (FileNotFoundException fe) {
-            System.err.println(fe);
-        }
-        return true;
-    }
+//    public boolean loadFileUser() {
+//        try {
+//            Scanner sc= new Scanner(new File(filename));
+//            while (sc.hasNext()) {
+//                String line = sc.nextLine();
+//                LogRecord record = new LogRecord(line);
+//                //add record to the deltaRecord
+//                deltaRecords.add(record);
+//            }
+//        } catch (FileNotFoundException fe) {
+//            System.err.println(fe);
+//        }
+//        return true;
+//    }
     /***
      * Removes user based on username
      * @param

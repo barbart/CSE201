@@ -1,24 +1,19 @@
 package com.CSE201;
+import java.io.*;
 import java.util.*;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.util.logging.LogRecord;
 
 /**
  * user class
  * default constructor, addUser, loadFile, updateFile, userverification
  * @author Barb
  */
-public class user {
+public class UserDB {
 	static ArrayList<User> users;
 	private final File file = new File(" ");
 
 	public void setUser(ArrayList<User> users) {
-	this.user = users;
+	this.users = users;
 	}
 	
 	/**
@@ -28,16 +23,16 @@ public class user {
 	 * @param perms permission
      * @param lev levels
 	 */
-	public void addUser(String u, String pass, int perms, int lev) {
-		storage.add(new Users(u, pass, perms, lev));
+	public void addUser(Integer userId, String userName, String userPassword, int userLevel) {
+		users.add(new User(userId, userName, userPassword, userLevel));
 	}
 	
 	/**
 	 * Adds user with Users object
 	 * @param a users
 	 */
-	public void addUser(Users a) {
-		storage.add(a);
+	public void addUser(User a) {
+		users.add(a);
 		updateFileUser();
 	}
 	
@@ -45,19 +40,15 @@ public class user {
 	 * Remove user with user object
 	 * @param user passed to remove
 	 */
-	public void removeUser(Users user) {
-		storage.remove(user);
+	public void removeUser(User user) {
+		users.remove(user);
 		updateFileUser();
 	}
-	
-	/***
-	 * Removes user based on username
-	 * @param id
-	 */
-	public void removeUser(String username) {
-		Users temp = this.getUser(username);
-		if(temp != null) {
-			removeUser(temp);
+	public void removeUser(String userName) {
+		for (int i = 0; i < users.size(); i++){
+			if (users.get(i).getUserName() == userName){
+				users.remove(i);
+			}
 		}
 	}
 
@@ -66,45 +57,45 @@ public class user {
 	 * @param in this case, referencing user 0, 
      * password (password may not be position 2
 	 */
-    public boolean userverification(){
-        if (input != users[0][2]) { 
-		char c;
-		char x;  
-            int count = 1;
-			if(user.password.length(x) != input.length()){
-				return false;
-			} else{
-            for (int i = 0; i < password.length() - 1; i++) {  
-                c = password.charAt(i); 
-				x = password.charAt(i);
-                if (Character.compare(c, x) == 0) {         
-                   continue;      
-                } else{
-					return false;
-				} 
-            }  
-        }  
-        return true;
-	  }  
-    }  
+//    public boolean userverification(){
+//        if (input != users.get(0).getUserName()) {
+//		char c;
+//		char x;
+//            int count = 1;
+//			if(UserDB.password.length(x) != input.length()){
+//				return false;
+//			} else{
+//            for (int i = 0; i < password.length() - 1; i++) {
+//                c = password.charAt(i);
+//				x = password.charAt(i);
+//                if (Character.compare(c, x) == 0) {
+//                   continue;
+//                } else{
+//					return false;
+//				}
+//            }
+//        }
+//        return true;
+//	  }
+//    }
     /***
 	 * Removes user based on username
 	 * @param 
 	 */
-	public boolean loadFileUser() {
-        try {
-            Scanner sc= new Scanner(new File(filename));
-            while (sc.hasNext()) {
-                String line = sc.nextLine();
-                LogRecord record = new LogRecord(line);
-                //add record to the deltaRecord
-                deltaRecords.add(record);
-            }
-        } catch (FileNotFoundException fe) {
-            System.err.println(fe);
-        }
-
-	}
+//	public boolean loadFileUser() {
+//        try {
+//            Scanner sc= new Scanner(new File(filename));
+//            while (sc.hasNext()) {
+//                String line = sc.nextLine();
+//                LogRecord record = new LogRecord(line);
+//                //add record to the deltaRecord
+//                deltaRecords.add(record);
+//            }
+//        } catch (FileNotFoundException fe) {
+//            System.err.println(fe);
+//        }
+//		return true;
+//	}
 	/***
 	 * Removes user based on username
 	 * @param 
@@ -113,7 +104,7 @@ public class user {
 	try{
 		FileOutputStream writeData = new FileOutputStream("users.ser");
 		ObjectOutputStream writeStream = new ObjectOutputStream(writeData);
-		writeStream.writeObject(this.storage);
+		writeStream.writeObject(users);
 		writeStream.flush();		
 		writeStream.close();
 			return true;
